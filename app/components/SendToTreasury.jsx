@@ -47,7 +47,7 @@ export default function SendToTreasury() {
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Desktop Layout - Side by side inputs */}
-        <div className="hidden sm:grid sm:grid-cols-1 lg:grid-cols-2 md:gap-6">
+        <div className="sm:grid sm:grid-cols-1 lg:grid-cols-2 md:gap-6">
           <div>
             <input
               type="text"
