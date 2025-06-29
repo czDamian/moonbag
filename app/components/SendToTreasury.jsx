@@ -20,8 +20,10 @@ export default function SendToTreasury() {
     },
     {
       name: "USDC",
-      icon: SiSolana,
-      color: "bg-gradient-to-r from-purple-500 to-purple-700",
+      icon: () => (
+        <Image src="/usdc.png" alt="USDC Token" width={100} height={100} className="rounded-full" />
+      ),
+      color: "bg-zinc-600",
     },
     {
       name: "$MOONBAG",

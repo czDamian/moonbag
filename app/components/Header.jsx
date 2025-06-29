@@ -38,10 +38,10 @@ export default function Header() {
               </button>
 
               {/* Logo */}
-              <div className="flex items-center gap-2">
+              <Link href="/" className="flex items-center gap-2">
                 <Image src="/moonbag.jpg" alt="Moon BAG" width={32} height={32} className="rounded-lg" />
                 <span className=" font-semibold text-lg">$MOONBAG</span>
-              </div>
+              </Link>
             </div>
 
             {/* Desktop Navigation */}
