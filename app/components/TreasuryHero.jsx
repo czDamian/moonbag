@@ -3,7 +3,7 @@
 import { FiCopy } from "react-icons/fi";
 
 export default function TreasuryHero() {
-  const treasuryAddress = "5KemPqD1SMqxKKdSmEJMCNtXTVUZcdSu4eYJ57YUqEZJ";
+  const treasuryAddress = process.env.NEXT_PUBLIC_TREASURY_ADDRESS;
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(treasuryAddress);
