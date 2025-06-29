@@ -2,6 +2,9 @@
 
 import { FiCheck, FiShoppingCart, FiLock, FiInfo } from "react-icons/fi"
 import { FaFire } from "react-icons/fa"
+import { FaBell } from "react-icons/fa6";
+import { IoCreate } from "react-icons/io5";
+import { DiGoogleAnalytics } from "react-icons/di";
 
 export default function VotingPage() {
   const votingMethods = [
@@ -10,8 +13,8 @@ export default function VotingPage() {
       title: "Vote YES/NO",
       subtitle: "Support or oppose proposals",
       description: "Simple YES/NO voting on all DAO and treasury decisions",
-      color: "text-[#3D2A78]",
-      bgColor: "bg-[#3D2A78]/10",
+      color: "text-gray-300",
+      bgColor: "bg-gray-300/10",
     },
     {
       icon: FaFire,
@@ -23,11 +26,11 @@ export default function VotingPage() {
     },
     {
       icon: FiShoppingCart,
-      title: "Buy with AVAX for 2x",
-      subtitle: "Purchase ID tokens with AVAX",
-      description: "Buy ID at market rate and lock for 2x voting weight",
-      color: "text-[#3D2A78]",
-      bgColor: "bg-[#3D2A78]/10",
+      title: "Buy with SOL for 2x",
+      subtitle: "Purchase MOONBAG tokens with SOL",
+      description: "Buy MOONBAG at market rate and lock for 2x voting weight",
+      color: "text-gray-300",
+      bgColor: "bg-gray-300/10",
     },
     {
       icon: FiLock,
@@ -46,7 +49,7 @@ export default function VotingPage() {
         <div className="text-center mb-12">
           {/* Icon */}
           <div className="flex justify-center mb-6">
-            <div className="w-16 h-16 bg-gradient-to-br from-[#E91E63] to-red-500 rounded-lg flex items-center justify-center transform rotate-45">
+            <div className="w-16 h-16 bg-gradient-to-br from-[#3D2A78] to-[#4A3085] rounded-lg flex items-center justify-center transform rotate-45">
               <div className="w-8 h-8 bg-zinc-900 rounded-sm transform -rotate-45"></div>
             </div>
           </div>
@@ -62,7 +65,7 @@ export default function VotingPage() {
           </p>
 
           {/* How It Works Button */}
-          <button className="inline-flex items-center space-x-2 bg-[#E91E63] hover:bg-[#FF4081] text-white px-6 py-3 rounded-lg font-medium transition-colors">
+          <button className="inline-flex items-center space-x-2 bg-[#4A3085] hover:bg-[#3D2A78] text-white px-6 py-3 rounded-lg font-medium transition-colors">
             <FiInfo className="w-4 h-4" />
             <span>HOW IT WORKS</span>
           </button>
@@ -86,7 +89,7 @@ export default function VotingPage() {
                 <h3 className="text-white text-lg font-semibold mb-2">{method.title}</h3>
 
                 {/* Subtitle */}
-                <p className="text-[#E91E63] text-sm font-medium mb-3">{method.subtitle}</p>
+                <p className="text-zinc-300 text-sm font-medium mb-3">{method.subtitle}</p>
 
                 {/* Description */}
                 <p className="text-zinc-400 text-sm leading-relaxed">{method.description}</p>
@@ -121,19 +124,19 @@ export default function VotingPage() {
             {/* Feature Preview */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-12">
               <div className="bg-zinc-800/50 border border-zinc-700 rounded-lg p-4">
-                <div className="text-purple-400 text-2xl mb-2">📊</div>
+                <DiGoogleAnalytics className="inline text-center text-purple-400 text-3xl mb-2" />
                 <h4 className="text-white font-medium mb-1">Analytics Dashboard</h4>
                 <p className="text-zinc-400 text-sm">Real-time voting statistics and governance metrics</p>
               </div>
 
               <div className="bg-zinc-800/50 border border-zinc-700 rounded-lg p-4">
-                <div className="text-pink-400 text-2xl mb-2">✍️</div>
+                <IoCreate className="inline text-center text-pink-400 text-3xl mb-2" />
                 <h4 className="text-white font-medium mb-1">Proposal Creation</h4>
                 <p className="text-zinc-400 text-sm">Submit and manage community proposals easily</p>
               </div>
 
               <div className="bg-zinc-800/50 border border-zinc-700 rounded-lg p-4">
-                <div className="text-blue-400 text-2xl mb-2">🔔</div>
+                <FaBell className="inline text-center text-blue-400 text-3xl mb-2" />
                 <h4 className="text-white font-medium mb-1">Smart Notifications</h4>
                 <p className="text-zinc-400 text-sm">Get alerts for new proposals and voting deadlines</p>
               </div>
