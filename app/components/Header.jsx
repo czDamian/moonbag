@@ -13,6 +13,7 @@ import ConnectWallet from "./ConnectWallet"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [solBalance, setSolBalance] = useState(0.00)
 
   const navigationItems = [
     { icon: FaDollarSign, label: "TREASURY", active: false },
@@ -94,19 +95,15 @@ export default function Header() {
             <div className="flex items-center space-x-3">
               {/* Desktop Wallet Info */}
               <div className="hidden md:flex items-center space-x-3">
-                {/* <div className="flex items-center space-x-2 bg-red-600 px-3 py-1.5 rounded-md">
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                  <span className=" text-sm font-medium">0.00</span>
-                </div> */}
                 <div className="flex items-center space-x-2 bg-[#fe66f65b]  px-3 py-2 rounded-md">
                   <MdAccountBalanceWallet className="w-4 h-4 " />
-                  <span className=" text-sm font-medium">0</span>
+                  <span className=" text-sm font-medium">{solBalance ?? 0.00} SOL</span>
                 </div>
               </div>
 
               {/* Connect Wallet Button - Visible on all devices */}
               <button className="text-[#FE66F7] uppercase">
-                <ConnectWallet />
+                <ConnectWallet onBalanceChange={(bal) => setSolBalance(bal ?? 0.00)} />
               </button>
             </div>
           </div>

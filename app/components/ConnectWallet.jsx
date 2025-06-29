@@ -1,29 +1,42 @@
 "use client";
-// import { WalletMultiButton } from "@solana/wallet-adapter-react-ui"
 import dynamic from "next/dynamic";
 import { useWallet } from '@solana/wallet-adapter-react';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Connection, clusterApiUrl } from "@solana/web3.js";
 
 // Dynamically import the WalletMultiButton to avoid SSR issues
-const WalletMultiButton = dynamic(() => import("@solana/wallet-adapter-react-ui").then(mod => mod.WalletMultiButton), {
-  ssr: false,
-});
+const WalletMultiButton = dynamic(
+  () => import("@solana/wallet-adapter-react-ui").then(mod => mod.WalletMultiButton),
+  { ssr: false }
+);
 
-const ConnectWallet = () => {
-  const { wallet } = useWallet();
+const ConnectWallet = ({ onBalanceChange }) => {
+  const { publicKey } = useWallet();
+  const [balance, setBalance] = useState(0.00);
 
   useEffect(() => {
-    if (wallet?.publicKey) {
-      console.log("wallet connected", wallet.publicKey.toString());
-      console.log("wallet connected", wallet);
+    if (publicKey) {
+      const connection = new Connection(clusterApiUrl("devnet"));
+      connection.getBalance(publicKey).then((lamports) => {
+        const sol = lamports / 1e9;
+        setBalance(sol);
+        if (onBalanceChange) {
+          onBalanceChange(sol);
+        }
+      });
+    } else {
+      setBalance(0.00);
+      if (onBalanceChange) {
+        onBalanceChange(0.00);
+      }
     }
-  }, [wallet?.publicKey, wallet]);
+  }, [publicKey, onBalanceChange]);
 
   return (
     <div>
       <WalletMultiButton />
     </div>
-  )
-}
+  );
+};
 
-export default ConnectWallet
+export default ConnectWallet;
