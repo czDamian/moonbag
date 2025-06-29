@@ -16,9 +16,9 @@ export default function TreasuryHero() {
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold [#383838] mb-6">
           Treasury
           <span
-            className="text-[#FE66F7]"
+            className="text-[#FE66F7] ml-4"
             style={{
-              textShadow: "0 0 2px #FE66F7, 0 0 6px #FE66F7",
+              textShadow: "0 0 2px #FE66F7, 0 0 4px #FE66F7",
             }}
           >
             Assets
@@ -55,7 +55,7 @@ export default function TreasuryHero() {
                 <h3 className="text-gray-400 text-sm font-medium mb-2">
                   Total Value
                 </h3>
-                <span className="text-[#FE66F7] text-2xl font-bold sha">
+                <span className="text-[#FE66F7] text-2xl font-bold ">
                   $2,938,697.37
                 </span>
               </div>
@@ -83,7 +83,7 @@ export default function TreasuryHero() {
                 <h3 className="text-gray-400 text-sm font-medium mb-2">
                   Total Value
                 </h3>
-                <span className="text-[#E91E63] text-2xl font-bold">
+                <span className="text-[#FE66F7] text-2xl font-bold">
                   $2,938,697.37
                 </span>
               </div>

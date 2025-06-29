@@ -111,7 +111,7 @@ export default function SendToTreasury() {
           {/* disclaimer */}
           <FaInfoCircle size={22} />
           <span>Connect your wallet to send tokens to the treasury. </span>
-          <button className="text-blue-500 hover:underline">Connect Wallet</button>
+          <button className="text-[#8958fd] hover:underline">Connect Wallet</button>
         </div>
       </form>
     </div>

@@ -54,7 +54,7 @@ export default function Header() {
                     <a
                       key={index}
                       href="https://dexscreener.com/solana/5zh2jbhmzaeef8ymcndabylv9obz1em2qhnxda7xt55u"
-                      className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors text-[#E91E63] hover:bg-[#e91e621e]`}
+                      className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors text-[#FE66F7] hover:bg-[#fe66f61c]`}
                     >
                       <Icon className="w-4 h-4" />
                       <span>{item.label}</span>
@@ -67,7 +67,7 @@ export default function Header() {
                     <Link
                       key={index}
                       href="/voting"
-                      className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-[#e91e621e]`}
+                      className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-[#fe66f61c] hover:text-[#FE66F7]`}
                     >
                       <Icon className="w-4 h-4" />
                       <span>{item.label}</span>
@@ -78,8 +78,8 @@ export default function Header() {
                   <button
                     key={index}
                     className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors  ${item.active
-                      ? "text-[#E91E63] bg-[#e91e621e]"
-                      : "text-gray-300 hover:text-[#E91E63] hover:bg-[#e91e621e]"
+                      ? "text-[#FE66F7] bg-[#fe66f61c]"
+                      : "text-gray-300 hover:text-[#FE66F7] hover:bg-[#fe66f61c]"
                       }`}
                   >
                     <Icon className="w-4 h-4" />
@@ -97,14 +97,14 @@ export default function Header() {
                   <div className="w-2 h-2 bg-white rounded-full"></div>
                   <span className=" text-sm font-medium">0.00</span>
                 </div> */}
-                <div className="flex items-center space-x-2 bg-[#E91E63] px-3 py-1.5 rounded-md">
+                <div className="flex items-center space-x-2 bg-[#fe66f65b]  px-3 py-2 rounded-md">
                   <MdAccountBalanceWallet className="w-4 h-4 " />
                   <span className=" text-sm font-medium">0</span>
                 </div>
               </div>
 
               {/* Connect Wallet Button - Visible on all devices */}
-              <button className="text-[#FF4081] uppercase hover:bg-[#e91e621e] px-4 py-1.5 rounded-md  text-sm font-medium transition-colors">
+              <button className="text-[#FE66F7] uppercase hover:bg-[#fe66f61c] px-4 py-2 rounded-md  text-sm font-medium transition-colors">
                 <span className="hidden sm:inline">5KemP...EZJ</span>
                 <span className="sm:hidden">5KemP...EZJ</span>
               </button>

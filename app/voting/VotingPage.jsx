@@ -100,7 +100,7 @@ export default function VotingPage() {
 
         {/* Coming Soon Section */}
         <div className="text-center py-16 border-t border-zinc-800">
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-4xl mx-auto">
             <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full mb-6">
               <span className="text-3xl">🚀</span>
             </div>
@@ -122,23 +122,23 @@ export default function VotingPage() {
             </div>
 
             {/* Feature Preview */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-12">
-              <div className="bg-zinc-800/50 border border-zinc-700 rounded-lg p-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-12 w-full">
+              <div className="bg-zinc-800/50 border border-zinc-700 rounded-lg p-4 lg:p-8">
                 <DiGoogleAnalytics className="inline text-center text-purple-400 text-3xl mb-2" />
-                <h4 className="text-white font-medium mb-1">Analytics Dashboard</h4>
-                <p className="text-zinc-400 text-sm">Real-time voting statistics and governance metrics</p>
+                <h4 className="text-white font-medium mb-1 lg:text-xl lg:mb-2">Analytics Dashboard</h4>
+                <p className="text-zinc-400 text-sm lg:text-base">Real-time voting statistics and governance metrics</p>
               </div>
 
               <div className="bg-zinc-800/50 border border-zinc-700 rounded-lg p-4">
                 <IoCreate className="inline text-center text-pink-400 text-3xl mb-2" />
-                <h4 className="text-white font-medium mb-1">Proposal Creation</h4>
-                <p className="text-zinc-400 text-sm">Submit and manage community proposals easily</p>
+                <h4 className="text-white font-medium mb-1 lg:text-xl lg:mb-2">Proposal Creation</h4>
+                <p className="text-zinc-400 text-sm lg:text-base">Submit and manage community proposals easily</p>
               </div>
 
               <div className="bg-zinc-800/50 border border-zinc-700 rounded-lg p-4">
                 <FaBell className="inline text-center text-blue-400 text-3xl mb-2" />
-                <h4 className="text-white font-medium mb-1">Smart Notifications</h4>
-                <p className="text-zinc-400 text-sm">Get alerts for new proposals and voting deadlines</p>
+                <h4 className="text-white font-medium mb-1 lg:text-xl lg:mb-2">Smart Notifications</h4>
+                <p className="text-zinc-400 text-sm lg:text-base">Get alerts for new proposals and voting deadlines</p>
               </div>
             </div>
           </div>

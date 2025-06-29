@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from "react"
 import { FiSearch, FiChevronLeft, FiChevronRight, FiLock } from "react-icons/fi"
-import { FaReddit, FaGlobe, FaComments } from "react-icons/fa"
+import { FaReddit, FaComments } from "react-icons/fa"
 import { FaXTwitter } from "react-icons/fa6";
+import { CiGlobe } from "react-icons/ci";
+import { IoMdSend } from "react-icons/io";
 
 export default function TokenHoldings() {
   const [currentPage, setCurrentPage] = useState(1)
@@ -114,11 +116,11 @@ export default function TokenHoldings() {
   const getSocialIcon = (social) => {
     switch (social) {
       case "reddit":
-        return <FaReddit className="w-4 h-4 text-[#FF4081] hover:text-[#FF4081]" />
+        return <IoMdSend className="w-4 h-4 text-[#FE66F7] hover:text-[#FE66F7]" />
       case "twitter":
-        return <FaXTwitter className="w-4 h-4 text-[#1DA1F2] hover:text-[#1A91DA]" />
+        return <FaXTwitter className="w-4 h-4 text-blue-500 hover:text-blue-500" />
       case "globe":
-        return <FaGlobe className="w-4 h-4 text-gray-400 hover:text-gray-300" />
+        return <CiGlobe className="w-4 h-4 text-[#FE66F7] hover:text-[#FE66F7]" />
       default:
         return null
     }
@@ -194,7 +196,7 @@ export default function TokenHoldings() {
       <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 space-y-4 md:space-y-0">
         <div className="flex items-center space-x-3">
           <h2 className="text-white text-2xl font-bold">Token Holdings</h2>
-          <span className="text-[#FF4081] text-sm font-medium">1564 tokens</span>
+          <span className="text-[#FE66F7] text-sm font-medium">1564 tokens</span>
         </div>
 
         {/* Search Bar */}
@@ -205,7 +207,7 @@ export default function TokenHoldings() {
             placeholder="Search tokens..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="bg-[#121212] border border-gray-600 rounded-lg pl-10 pr-4 py-2 text-white placeholder-gray-400 focus:outline-none focus:border-[#FF4081] w-full md:w-64"
+            className="bg-[#121212] border border-gray-600 rounded-lg pl-10 pr-4 py-2 text-white placeholder-gray-400 focus:outline-none focus:border-[#FE66F7] w-full md:w-64"
           />
         </div>
       </div>
@@ -219,7 +221,7 @@ export default function TokenHoldings() {
               key={filter.label}
               onClick={() => setActiveFilter(filter.label)}
               className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${activeFilter === filter.label
-                ? "bg-[#FF4081] text-white"
+                ? "bg-[#FE66F7] text-white"
                 : "bg-[#121212] text-gray-300 hover:bg-gray-600"
                 }`}
             >
@@ -243,7 +245,7 @@ export default function TokenHoldings() {
           </thead>
           <tbody>
             {tokens.map((token) => {
-              
+
               return (
                 <tr
                   key={token.id}
@@ -263,7 +265,8 @@ export default function TokenHoldings() {
                           <span className="text-gray-400 text-sm">{token.ticker}</span>
                         </div>
                       </div>
-                      <div className="flex items-center space-x-2 ml-4">
+                      {/* Hide social icons on mobile */}
+                      <div className="items-center space-x-2 ml-4 hidden md:flex">
                         {token.socials.map((social, index) => (
                           <button key={index} className="hover:scale-110 transition-transform">
                             {getSocialIcon(social)}
@@ -274,7 +277,7 @@ export default function TokenHoldings() {
                   </td>
                   <td className="text-right text-white py-4">{token.balance}</td>
                   <td className="text-right text-white py-4">{token.price}</td>
-                  <td className="text-right text-green-400 font-medium py-4">{token.value}</td>
+                  <td className="text-right text-green-600 font-medium py-4">{token.value}</td>
                 </tr>
               );
             })}
@@ -287,13 +290,12 @@ export default function TokenHoldings() {
         {tokens.map((token) => (
           <div
             key={token.id}
-            className={`rounded-lg p-4 ${
-              token.featured
+            className={`rounded-lg p-4 ${token.featured
                 ? featuredBgToggle
                   ? "bg-pink-900/40 border-l-4 border-pink-700"
-                : "bg-[#4A3085]/50 border-l-4 border-[#4A3085]"
+                  : "bg-[#4A3085]/50 border-l-4 border-[#4A3085]"
                 : "bg-[#121212]"
-            }`}
+              }`}
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
@@ -308,7 +310,7 @@ export default function TokenHoldings() {
                   <span className="text-gray-400 text-sm">{token.ticker}</span>
                 </div>
               </div>
-              <span className="text-green-400 font-medium">{token.value}</span>
+              <span className="text-green-600 font-medium">{token.value}</span>
             </div>
           </div>
         ))}

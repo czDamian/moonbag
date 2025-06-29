@@ -51,7 +51,7 @@ export default function Sidebar({ isOpen, onClose }) {
                   href="https://dexscreener.com/solana/5zh2jbhmzaeef8ymcndabylv9obz1em2qhnxda7xt55u"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full flex items-center space-x-3 px-6 py-3 text-left transition-colors text-[#E91E63] hover:bg-[#383838] font-medium"
+                  className="w-full flex items-center space-x-3 px-6 py-3 text-left transition-colors text-[#FE66F7] hover:bg-[#383838] font-medium"
                 >
                   <Icon className="w-5 h-5" />
                   <span>{item.label}</span>
@@ -75,7 +75,7 @@ export default function Sidebar({ isOpen, onClose }) {
               <button
                 key={index}
                 className={`w-full flex items-center space-x-3 px-6 py-3 text-left transition-colors ${item.active
-                  ? "bg-[#383838] text-white border-r-2 border-[#e91e62a1]"
+                  ? "bg-[#383838] text-white border-r-2 border-[#fe66f7a1]"
                   : "text-gray-300 hover:bg-[#383838] hover:text-white"
                   }`}
               >
