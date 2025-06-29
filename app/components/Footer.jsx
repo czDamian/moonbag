@@ -1,8 +1,8 @@
 "use client"
 
 import { FiCopy } from "react-icons/fi"
-import { FaTwitter, FaDiscord } from "react-icons/fa"
 import Image from "next/image"
+import { FaXTwitter } from "react-icons/fa6";
 
 export default function Footer() {
   const walletAddress = "5KemPq...YUqEZJ"
@@ -22,19 +22,16 @@ export default function Footer() {
           <div className="flex items-center space-x-3">
             <Image src="/moonbag.jpg" alt="Moon BAG" width={32} height={32} className="rounded-lg" />
             <div>
-              <h3 className="text-white font-bold text-lg">Moon Bag</h3>
+              <h3 className="text-white font-bold text-lg">$MOONBAG</h3>
               <p className="text-zinc-400 text-sm">Where integrity meets community</p>
             </div>
           </div>
 
           {/* Social Media Icons */}
           <div className="flex items-center space-x-4">
-            <button className="w-12 h-12 bg-zinc-700 hover:bg-zinc-600 rounded-full flex items-center justify-center transition-colors">
-              <FaDiscord className="w-5 h-5 text-zinc-300 hover:text-white" />
-            </button>
-            <button className="w-12 h-12 bg-zinc-700 hover:bg-zinc-600 rounded-full flex items-center justify-center transition-colors">
-              <FaTwitter className="w-5 h-5 text-zinc-300 hover:text-white" />
-            </button>
+            <a href="https://x.com/MoonBagOG" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-zinc-700 hover:bg-zinc-600 rounded-full flex items-center justify-center transition-colors">
+              <FaXTwitter className="w-5 h-5 text-zinc-300 hover:text-white" />
+            </a>
           </div>
 
           {/* Wallet Address */}

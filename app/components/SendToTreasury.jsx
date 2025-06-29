@@ -19,12 +19,12 @@ export default function SendToTreasury() {
       color: "bg-gradient-to-r from-purple-400 to-purple-600",
     },
     {
-      name: "WSOL",
+      name: "USDC",
       icon: SiSolana,
       color: "bg-gradient-to-r from-purple-500 to-purple-700",
     },
     {
-      name: "MB",
+      name: "$MOONBAG",
       icon: () => (
         <Image src="/moonbag.jpg" alt="Moon Bag Token" width={100} height={100} className="rounded-full" />
       ),

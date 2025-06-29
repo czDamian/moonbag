@@ -8,17 +8,18 @@ import { RiNftFill } from "react-icons/ri"
 import { GiDustCloud } from "react-icons/gi"
 import Sidebar from "./Sidebar"
 import Image from "next/image"
+import Link from "next/link"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const navigationItems = [
-    { icon: FaDollarSign, label: "TREASURY", active: true },
+    { icon: FaDollarSign, label: "TREASURY", active: false },
     // { icon: RiNftFill, label: "NFTS" },
     { icon: FaChartBar, label: "LEADERBOARD" },
-    // { icon: FaVoteYea, label: "VOTING" },
+    { icon: FaVoteYea, label: "VOTING" },
     // { icon: GiDustCloud, label: "DUST" },
-    { icon: FaShoppingCart, label: "BUY $ID" },
+    { icon: FaShoppingCart, label: "BUY $MOONBAG", active: true },
   ]
 
   return (
@@ -39,7 +40,7 @@ export default function Header() {
               {/* Logo */}
               <div className="flex items-center gap-2">
                 <Image src="/moonbag.jpg" alt="Moon BAG" width={32} height={32} className="rounded-lg" />
-                <span className=" font-semibold text-lg">Moon BAG</span>
+                <span className=" font-semibold text-lg">$MOONBAG</span>
               </div>
             </div>
 
@@ -47,6 +48,32 @@ export default function Header() {
             <nav className="hidden lg:flex items-center space-x-8">
               {navigationItems.map((item, index) => {
                 const Icon = item.icon
+                // Make BUY $MOONBAG an external link
+                if (item.label === "BUY $MOONBAG") {
+                  return (
+                    <a
+                      key={index}
+                      href="https://dexscreener.com/solana/5zh2jbhmzaeef8ymcndabylv9obz1em2qhnxda7xt55u"
+                      className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors text-[#E91E63] hover:bg-[#e91e621e]`}
+                    >
+                      <Icon className="w-4 h-4" />
+                      <span>{item.label}</span>
+                    </a>
+                  )
+                }
+                // Make VOTING an external link
+                if (item.label === "VOTING") {
+                  return (
+                    <Link
+                      key={index}
+                      href="/voting"
+                      className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-[#e91e621e]`}
+                    >
+                      <Icon className="w-4 h-4" />
+                      <span>{item.label}</span>
+                    </Link>
+                  )
+                }
                 return (
                   <button
                     key={index}

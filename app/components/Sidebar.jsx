@@ -7,15 +7,16 @@ import { GiDustCloud } from "react-icons/gi"
 import { MdAccountBalanceWallet } from "react-icons/md"
 import { SiSolana } from "react-icons/si"
 import Image from "next/image"
+import Link from "next/link"
 
 export default function Sidebar({ isOpen, onClose }) {
   const navigationItems = [
     { icon: FaDollarSign, label: "Treasury", active: true },
     // { icon: RiNftFill, label: "NFTs" },
     { icon: FaChartBar, label: "Leaderboard" },
-    // { icon: FaVoteYea, label: "Voting" },
+    { icon: FaVoteYea, label: "Voting" },
     // { icon: GiDustCloud, label: "Dust Collector" },
-    { icon: FaShoppingCart, label: "Buy $ID", special: true },
+    { icon: FaShoppingCart, label: "Buy $MOONBAG", special: true },
   ]
 
   if (!isOpen) return null
@@ -41,21 +42,47 @@ export default function Sidebar({ isOpen, onClose }) {
         {/* Navigation Menu */}
         <nav className="flex-1 py-4">
           {navigationItems.map((item, index) => {
-            const Icon = item.icon
+            const Icon = item.icon;
+            // If it's the special "Buy $MOONBAG" button, render as a link
+            if (item.special) {
+              return (
+                <a
+                  key={index}
+                  href="https://dexscreener.com/solana/5zh2jbhmzaeef8ymcndabylv9obz1em2qhnxda7xt55u"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full flex items-center space-x-3 px-6 py-3 text-left transition-colors text-[#E91E63] hover:bg-[#383838] font-medium"
+                >
+                  <Icon className="w-5 h-5" />
+                  <span>{item.label}</span>
+                </a>
+              );
+            }
+            // If it's the Voting link, render as an external link
+            if (item.label === "Voting") {
+              return (
+                <Link
+                  key={index}
+                  href="/voting"
+                  className="w-full flex items-center space-x-3 px-6 py-3 text-left transition-colors hover:bg-[#383838] font-medium"
+                >
+                  <Icon className="w-5 h-5" />
+                  <span>{item.label}</span>
+                </Link>
+              );
+            }
             return (
               <button
                 key={index}
                 className={`w-full flex items-center space-x-3 px-6 py-3 text-left transition-colors ${item.active
                   ? "bg-[#383838] text-white border-r-2 border-[#e91e62a1]"
-                  : item.special
-                    ? "text-[#E91E63] hover:bg-[#383838]"
-                    : "text-gray-300 hover:bg-[#383838] hover:text-white"
+                  : "text-gray-300 hover:bg-[#383838] hover:text-white"
                   }`}
               >
                 <Icon className="w-5 h-5" />
                 <span className="font-medium">{item.label}</span>
               </button>
-            )
+            );
           })}
         </nav>
 
