@@ -9,6 +9,7 @@ import { GiDustCloud } from "react-icons/gi"
 import Sidebar from "./Sidebar"
 import Image from "next/image"
 import Link from "next/link"
+import ConnectWallet from "./ConnectWallet"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -104,9 +105,8 @@ export default function Header() {
               </div>
 
               {/* Connect Wallet Button - Visible on all devices */}
-              <button className="text-[#FE66F7] uppercase hover:bg-[#fe66f61c] px-4 py-2 rounded-md  text-sm font-medium transition-colors">
-                <span className="hidden sm:inline">5KemP...EZJ</span>
-                <span className="sm:hidden">5KemP...EZJ</span>
+              <button className="text-[#FE66F7] uppercase">
+                <ConnectWallet />
               </button>
             </div>
           </div>

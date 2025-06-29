@@ -8,7 +8,9 @@ import TreasuryHero from "./components/TreasuryHero";
 export default function Home() {
   return (
     <div>
-      <Header />
+      <div>
+        <Header />
+      </div>
       <div className="px-12 md:px-16 font-(family-name:--font-roboto)">
         <TreasuryHero />
         <TokenHoldings />
