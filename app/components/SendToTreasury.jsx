@@ -8,7 +8,7 @@ import { FaInfoCircle } from "react-icons/fa";
 import Image from "next/image";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { WalletNotConnectedError } from "@solana/wallet-adapter-base";
-import { PublicKey, SystemProgram, Transaction } from "@solana/web3.js";
+import { PublicKey, Transaction } from "@solana/web3.js";
 import { getAssociatedTokenAddress, createTransferInstruction } from "@solana/spl-token";
 
 export default function SendToTreasury() {
@@ -36,6 +36,7 @@ export default function SendToTreasury() {
         symbol: "",
         contractAddress: "",
         logo: "/usdc.png",
+        decimals: null,
       });
       return;
     }
@@ -54,6 +55,7 @@ export default function SendToTreasury() {
             symbol: data.symbol,
             contractAddress: data.contractAddress,
             logo: data.logo || "/usdc.png",
+            decimals: data.decimals,
           });
           setShowTokenDetails(true);
           setError("");
@@ -109,7 +111,7 @@ export default function SendToTreasury() {
     // Use decimals from tokenDetails, fallback to 9 if not available
     const decimals = tokenDetails.decimals
       ? Number(tokenDetails.decimals)
-      : 9;
+      : 6;
 
     try {
       const mint = new PublicKey(tokenAddress);

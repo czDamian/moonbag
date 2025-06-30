@@ -94,9 +94,9 @@ export default function Header() {
               </div>
 
               {/* Connect Wallet Button - Visible on all devices */}
-              <button className="text-[#FE66F7] uppercase">
+              <div className="text-[#FE66F7] uppercase">
                 <ConnectWallet onBalanceChange={(bal) => setSolBalance(bal ?? 0.00)} />
-              </button>
+              </div>
             </div>
           </div>
         </div>
