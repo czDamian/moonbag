@@ -12,7 +12,7 @@ const roboto = Roboto({
 export const metadata = {
   title: "Moon Bag",
   description: "Moon Bag Treasury",
-  authors: [{ name: 'Damian', url: 'https://x.com/Desci_ai_bot' }],
+  authors: [{ name: 'Damian', url: 'https://x.com/MoonBagOG' }],
   robots: 'index, follow',
   openGraph: {
     title: "Moon Bag",
