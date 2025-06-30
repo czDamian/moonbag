@@ -6,6 +6,7 @@ import { FaComments } from "react-icons/fa"
 import { FaXTwitter } from "react-icons/fa6";
 import { CiGlobe } from "react-icons/ci";
 import { IoMdSend } from "react-icons/io";
+import { dummyTokens } from "./dummyData";
 
 export default function TokenHoldings() {
   const [currentPage, setCurrentPage] = useState(1)
@@ -149,14 +150,14 @@ export default function TokenHoldings() {
     return pages
   }
 
-  // Filter and search tokens (client-side)
-  const filteredTokens = tokens.filter(token => {
-    const search = searchTerm.toLowerCase()
+  // Filter and search tokens (client-side) or display dummy data if no token was found
+  const filteredTokens = (tokens.length === 0 ? dummyTokens : tokens).filter(token => {
+    const search = searchTerm.toLowerCase();
     return (
       token.name?.toLowerCase().includes(search) ||
       token.symbol?.toLowerCase().includes(search)
-    )
-  })
+    );
+  });
 
   // Helper to render socials
   const renderSocials = (links = {}) => {
