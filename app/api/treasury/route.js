@@ -2,6 +2,10 @@ import { NextResponse } from 'next/server';
 
 const API_KEY = process.env.MORALIS_API_KEY;
 
+// Simple in-memory cache (for demonstration; use Redis or a persistent cache for production)
+const tokenCache = new Map();
+const CACHE_DURATION_MS = 12 * 60 * 60 * 1000; // 12 hours
+
 export async function POST(request) {
   const { searchParams } = new URL(request.url);
   const tokenId = searchParams.get("tokenId");
@@ -10,6 +14,14 @@ export async function POST(request) {
     return NextResponse.json({
       msg: "Missing tokenId parameter"
     }, { status: 400 });
+  }
+
+  // Check cache
+  const cached = tokenCache.get(tokenId);
+  const now = Date.now();
+  if (cached && (now - cached.timestamp < CACHE_DURATION_MS)) {
+    console.log(`Returning cached data for tokenId: ${tokenId}`);
+    return NextResponse.json(cached.data);
   }
 
   const url = `https://solana-gateway.moralis.io/token/mainnet/${tokenId}/metadata`;
@@ -43,6 +55,9 @@ export async function POST(request) {
       success: true
     };
 
+    // Store in cache
+    tokenCache.set(tokenId, { data: result, timestamp: now });
+
     return NextResponse.json(result);
   } catch (err) {
     console.error(err);
@@ -52,6 +67,7 @@ export async function POST(request) {
     }, { status: 500 });
   }
 }
+
 export function GET() {
   return NextResponse.json({ msg: "Hello World" })
 }

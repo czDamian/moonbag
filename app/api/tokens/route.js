@@ -2,6 +2,13 @@ import { NextResponse } from 'next/server';
 
 const API_KEY = process.env.MORALIS_API_KEY;
 
+// Simple in-memory cache (for demonstration; use Redis or a persistent cache for production)
+const tokensCache = {
+  data: null,
+  timestamp: 0
+};
+const CACHE_DURATION_MS = 12 * 60 * 60 * 1000; // 12 hours
+
 // Helper to fetch token metadata for a given token address
 async function fetchTokenMetadata(tokenAddress) {
   const url = `https://solana-gateway.moralis.io/token/mainnet/${tokenAddress}/metadata`;
@@ -41,6 +48,27 @@ export async function GET(request) {
   const page = parseInt(searchParams.get("page") || "1", 10);
   const pageSize = 10;
 
+  const now = Date.now();
+  // Check cache
+  if (tokensCache.data && (now - tokensCache.timestamp < CACHE_DURATION_MS)) {
+    console.log("Returning cached tokens data");
+    // Paginate cached data
+    const validMetadatas = tokensCache.data;
+    const total = validMetadatas.length;
+    const totalPages = Math.ceil(total / pageSize);
+    const start = (page - 1) * pageSize;
+    const end = start + pageSize;
+    const paginatedTokens = validMetadatas.slice(start, end);
+
+    return NextResponse.json({
+      page,
+      pageSize,
+      total,
+      totalPages,
+      tokens: paginatedTokens,
+    });
+  }
+
   const url = 'https://solana-gateway.moralis.io/token/mainnet/exchange/pumpfun/graduated?limit=99';
   const options = {
     method: 'GET',
@@ -53,7 +81,6 @@ export async function GET(request) {
   try {
     const res = await fetch(url, options);
     const data = await res.json();
-    // console.log("Moralis response:", data);
 
     // Get all tokens
     const allTokens = Array.isArray(data.result) ? data.result : [];
@@ -81,6 +108,10 @@ export async function GET(request) {
 
     // Filter out nulls and tokens without a logo BEFORE pagination
     const validMetadatas = metadatas.filter(meta => meta && meta.logo);
+
+    // Store in cache
+    tokensCache.data = validMetadatas;
+    tokensCache.timestamp = now;
 
     // Paginate the filtered results
     const total = validMetadatas.length;

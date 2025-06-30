@@ -6,7 +6,6 @@ import { FaComments } from "react-icons/fa"
 import { FaXTwitter } from "react-icons/fa6";
 import { CiGlobe } from "react-icons/ci";
 import { IoMdSend } from "react-icons/io";
-import { dummyTokens } from "./dummyData";
 
 export default function TokenHoldings() {
   const [currentPage, setCurrentPage] = useState(1)
@@ -150,8 +149,8 @@ export default function TokenHoldings() {
     return pages
   }
 
-  // Filter and search tokens (client-side) or display dummy data if no token was found
-  const filteredTokens = (tokens.length === 0 ? dummyTokens : tokens).filter(token => {
+  // Filter and search tokens (client-side)
+  const filteredTokens = tokens.filter(token => {
     const search = searchTerm.toLowerCase();
     return (
       token.name?.toLowerCase().includes(search) ||
@@ -235,7 +234,7 @@ export default function TokenHoldings() {
             <tbody>
               {filteredTokens.slice(0, itemsPerPage).map((token, idx) => (
                 <tr
-                  key={token.contractAddress || idx}
+                  key={token.contractAddress}
                   className={`text-sm border-b border-[#121212] hover:bg-[#121212]/50`}
                 >
                   <td className="py-4">
@@ -278,7 +277,7 @@ export default function TokenHoldings() {
         <div className="md:hidden space-y-4">
           {filteredTokens.slice(0, itemsPerPage).map((token, idx) => (
             <div
-              key={token.contractAddress || idx}
+              key={token.contractAddress}
               className="rounded-lg flex  justify-between items-center p-4 bg-[#121212]"
             >
               <div className="flex items-center space-x-3">
