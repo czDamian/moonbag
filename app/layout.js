@@ -12,6 +12,23 @@ const roboto = Roboto({
 export const metadata = {
   title: "Moon Bag",
   description: "Moon Bag Treasury",
+  authors: [{ name: 'Damian', url: 'https://x.com/Desci_ai_bot' }],
+  robots: 'index, follow',
+  openGraph: {
+    title: "Moon Bag",
+    description:
+      "Moon Bag Treasury",
+    url: "https://www.moon-bag.fun/",
+    siteName: "MoonBag",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Moon Bag",
+    description:
+      "Moon Bag Treasury",
+  },
 };
 
 export default function RootLayout({ children }) {
