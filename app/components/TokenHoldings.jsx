@@ -1,8 +1,8 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { FiSearch, FiChevronLeft, FiChevronRight, FiLock } from "react-icons/fi"
-import { FaReddit, FaComments } from "react-icons/fa"
+import { FiSearch, FiChevronLeft, FiChevronRight, FiLock, FiCopy } from "react-icons/fi"
+import { FaComments } from "react-icons/fa"
 import { FaXTwitter } from "react-icons/fa6";
 import { CiGlobe } from "react-icons/ci";
 import { IoMdSend } from "react-icons/io";
@@ -11,6 +11,11 @@ export default function TokenHoldings() {
   const [currentPage, setCurrentPage] = useState(1)
   const [searchTerm, setSearchTerm] = useState("")
   const [activeFilter, setActiveFilter] = useState("ALL TOKENS")
+  const [tokens, setTokens] = useState([])
+  const [totalPages, setTotalPages] = useState(1)
+  const [totalTokens, setTotalTokens] = useState(0)
+  const [loading, setLoading] = useState(false)
+  const [copiedIdx, setCopiedIdx] = useState(null)
 
   // Add this state for toggling the featured background
   const [featuredBgToggle, setFeaturedBgToggle] = useState(false);
@@ -22,89 +27,20 @@ export default function TokenHoldings() {
     { label: "COMMENTS", icon: FaComments },
   ]
 
-  const tokens = [
-    {
-      id: 1,
-      name: "The MOOCH",
-      ticker: "MOOCH",
-      icon: "🌙",
-      balance: "1,502,000,129.7148",
-      price: "$0.00002",
-      value: "$30,236.16",
-      socials: ["reddit", "globe", "twitter"],
-      locked: true,
-      featured: true,
-    },
-    {
-      id: 2,
-      name: "LAMBO",
-      ticker: "LAMBO",
-      icon: "🏎️",
-      balance: "500,005,390",
-      price: "$0.003391",
-      value: "$1,695,554.90",
-      socials: ["reddit", "globe", "twitter"],
-      locked: true,
-    },
-    {
-      id: 3,
-      name: "Integrity DAO",
-      ticker: "ID",
-      icon: "🦊",
-      balance: "310,914,790.6039",
-      price: "$0.000987",
-      value: "$306,778.72",
-      socials: ["twitter", "globe"],
-      locked: true,
-    },
-    {
-      id: 4,
-      name: "WOLFI",
-      ticker: "WOLFI",
-      icon: "🐺",
-      balance: "300,000,000",
-      price: "$0.00064",
-      value: "$192,091.37",
-      socials: ["reddit", "globe", "twitter"],
-      locked: true,
-    },
-    {
-      id: 5,
-      name: "MEOW",
-      ticker: "MEOW",
-      icon: "😺",
-      balance: "352,623,915.721",
-      price: "$0.000493",
-      value: "$173,702.02",
-      socials: ["reddit", "twitter"],
-      locked: true,
-    },
-    {
-      id: 6,
-      name: "BABY JUBJUB",
-      ticker: "BJUB",
-      icon: "👶",
-      balance: "500,000,000",
-      price: "$0.000248",
-      value: "$123,784.45",
-      socials: ["reddit", "twitter"],
-      locked: true,
-    },
-    {
-      id: 7,
-      name: "Emini Spaghettini",
-      ticker: "EMINI",
-      icon: "🍝",
-      balance: "750,001,114.3627",
-      price: "$0.000111",
-      value: "$83,222.29",
-      socials: ["twitter"],
-      locked: true,
-    },
-  ]
-
-  const totalPages = 32
   const itemsPerPage = 10
+
+  useEffect(() => {
+    setLoading(true)
+    fetch(`/api/tokens?page=${currentPage}`)
+      .then(res => res.json())
+      .then(data => {
+        setTokens(data.tokens || [])
+        setTotalPages(data.totalPages || 1)
+        setTotalTokens(data.total || 0)
+        setLoading(false)
+      })
+      .catch(() => setLoading(false))
+  }, [currentPage])
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -113,18 +49,36 @@ export default function TokenHoldings() {
     return () => clearInterval(interval);
   }, []);
 
-  const getSocialIcon = (social) => {
+  const getSocialIcon = (social, url) => {
     switch (social) {
       case "reddit":
-        return <IoMdSend className="w-4 h-4 text-[#FE66F7] hover:text-[#FE66F7]" />
+        return (
+          <a href={url} target="_blank" rel="noopener noreferrer">
+            <IoMdSend className="w-4 h-4 text-[#FE66F7] hover:text-[#FE66F7]" />
+          </a>
+        );
       case "twitter":
-        return <FaXTwitter className="w-4 h-4 text-blue-500 hover:text-blue-500" />
+        return (
+          <a href={url} target="_blank" rel="noopener noreferrer">
+            <FaXTwitter className="w-4 h-4 text-blue-500 hover:text-blue-500" />
+          </a>
+        );
       case "globe":
-        return <CiGlobe className="w-4 h-4 text-[#FE66F7] hover:text-[#FE66F7]" />
+        return (
+          <a href={url} target="_blank" rel="noopener noreferrer">
+            <CiGlobe className="w-4 h-4 text-[#FE66F7] hover:text-[#FE66F7]" />
+          </a>
+        );
       default:
         return null
     }
   }
+
+  const handleCopy = (address, idx) => {
+    navigator.clipboard.writeText(address);
+    setCopiedIdx(idx);
+    setTimeout(() => setCopiedIdx(null), 1200);
+  };
 
   const renderPagination = () => {
     const pages = []
@@ -143,7 +97,12 @@ export default function TokenHoldings() {
     )
 
     // Page numbers
-    for (let i = 1; i <= Math.min(maxVisiblePages, totalPages); i++) {
+    let startPage = Math.max(1, currentPage - 1)
+    let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1)
+    if (endPage - startPage < maxVisiblePages - 1) {
+      startPage = Math.max(1, endPage - maxVisiblePages + 1)
+    }
+    for (let i = startPage; i <= endPage; i++) {
       pages.push(
         <button
           key={i}
@@ -157,7 +116,7 @@ export default function TokenHoldings() {
     }
 
     // Ellipsis and last page
-    if (totalPages > maxVisiblePages) {
+    if (endPage < totalPages) {
       pages.push(
         <span key="ellipsis" className="px-3 py-2 text-gray-400">
           ...
@@ -190,13 +149,36 @@ export default function TokenHoldings() {
     return pages
   }
 
+  // Filter and search tokens (client-side)
+  const filteredTokens = tokens.filter(token => {
+    const search = searchTerm.toLowerCase()
+    return (
+      token.name?.toLowerCase().includes(search) ||
+      token.symbol?.toLowerCase().includes(search)
+    )
+  })
+
+  // Helper to render socials
+  const renderSocials = (links = {}) => {
+    const socials = []
+    if (links.twitter) socials.push(getSocialIcon("twitter", links.twitter))
+    if (links.reddit) socials.push(getSocialIcon("reddit", links.reddit))
+    if (links.website) socials.push(getSocialIcon("globe", links.website))
+    if (links.globe) socials.push(getSocialIcon("globe", links.globe))
+    return (
+      <span className="flex items-center gap-2 ml-2">
+        {socials}
+      </span>
+    )
+  }
+
   return (
     <div className="bg-[#1a1a1a] border border-[#121212] rounded-lg p-6 max-w-7xl mx-auto">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 space-y-4 md:space-y-0">
         <div className="flex items-center space-x-3">
           <h2 className="text-white text-2xl font-bold">Token Holdings</h2>
-          <span className="text-[#FE66F7] text-sm font-medium">1564 tokens</span>
+          <span className="text-[#FE66F7] text-sm font-medium">{totalTokens} tokens</span>
         </div>
 
         {/* Search Bar */}
@@ -232,89 +214,104 @@ export default function TokenHoldings() {
         })}
       </div>
 
-      {/* Desktop Table */}
-      <div className="hidden md:block overflow-x-auto">
-        <table className="w-full">
-          <thead>
-            <tr className="border-b border-[#121212]">
-              <th className="text-left text-gray-400 font-medium py-3">Asset</th>
-              <th className="text-right text-gray-400 font-medium py-3">Balance</th>
-              <th className="text-right text-gray-400 font-medium py-3">Price</th>
-              <th className="text-right text-gray-400 font-medium py-3">Value</th>
-            </tr>
-          </thead>
-          <tbody>
-            {tokens.map((token) => {
+      {/* Loading */}
+      {loading && (
+        <div className="text-center text-gray-400 py-8">Loading tokens...</div>
+      )}
 
-              return (
+      {/* Desktop Table */}
+      {!loading && (
+        <div className="hidden md:block overflow-x-auto">
+          <table className="w-full">
+            <thead>
+              <tr className="border-b border-[#121212]">
+                <th className="text-left text-gray-400 font-medium py-3">Asset</th>
+                <th className="text-right text-gray-400 font-medium py-3">Price (USD)</th>
+                <th className="text-right text-gray-400 font-medium py-3">Liquidity</th>
+                <th className="text-right text-gray-400 font-medium py-3">FDV</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredTokens.slice(0, itemsPerPage).map((token, idx) => (
                 <tr
-                  key={token.id}
+                  key={token.contractAddress || idx}
                   className={`text-sm border-b border-[#121212] hover:bg-[#121212]/50`}
                 >
-                  <td className="py-4 ">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-10 h-10 bg-[#121212] rounded-full flex items-center justify-center text-lg">
-                          {token.icon}
+                  <td className="py-4">
+                    <div className="flex items-center space-x-3">
+                      <img
+                        src={token.logo}
+                        alt={token.name}
+                        className="w-10 h-10 rounded-full bg-[#121212] object-cover"
+                        onError={e => { e.target.src = "/usdc.png" }}
+                      />
+                      <div>
+                        <div className="flex items-center space-x-2">
+                          <span className="text-white font-medium">{token.name}</span>
+                          <span className="text-gray-400 text-xs uppercase">({token.symbol})</span>
+                          {renderSocials(token.links)}
                         </div>
-                        <div>
-                          <div className="flex items-center space-x-2">
-                            <span className="text-white font-medium">{token.name}</span>
-                            {token.locked && <FiLock className="w-3 h-3 text-yellow-500" />}
-                          </div>
-                          <span className="text-gray-400 text-sm">{token.ticker}</span>
-                        </div>
-                      </div>
-                      {/* Hide social icons on mobile */}
-                      <div className="items-center space-x-2 ml-4 hidden md:flex">
-                        {token.socials.map((social, index) => (
-                          <button key={index} className="hover:scale-110 transition-transform">
-                            {getSocialIcon(social)}
-                          </button>
-                        ))}
+                        <button
+                          className="flex items-center gap-1 text-xs text-gray-400 hover:text-[#FE66F7] mt-1"
+                          onClick={() => handleCopy(token.contractAddress, idx)}
+                          title="Copy address"
+                        >
+                          <FiCopy className="w-4 h-4" />
+                          {copiedIdx === idx ? "Copied!" : " "}
+                        </button>
                       </div>
                     </div>
                   </td>
-                  <td className="text-right text-white py-4">{token.balance}</td>
-                  <td className="text-right text-white py-4">{token.price}</td>
-                  <td className="text-right text-green-600 font-medium py-4">{token.value}</td>
+                  <td className="text-right text-white py-4">${token.priceUsd ?? "-"}</td>
+                  <td className="text-right text-white py-4">{token.liquidity ?? "-"}</td>
+                  <td className="text-right text-white py-4">{token.fullyDilutedValuation ?? "-"}</td>
                 </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
 
       {/* Mobile Cards */}
-      <div className="md:hidden space-y-4">
-        {tokens.map((token) => (
-          <div
-            key={token.id}
-            className={`rounded-lg p-4 ${token.featured
-                ? featuredBgToggle
-                  ? "bg-pink-900/40 border-l-4 border-pink-700"
-                  : "bg-[#4A3085]/50 border-l-4 border-[#4A3085]"
-                : "bg-[#121212]"
-              }`}
-          >
-            <div className="flex items-center justify-between">
+      {!loading && (
+        <div className="md:hidden space-y-4">
+          {filteredTokens.slice(0, itemsPerPage).map((token, idx) => (
+            <div
+              key={token.contractAddress || idx}
+              className="rounded-lg flex  justify-between items-center p-4 bg-[#121212]"
+            >
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-gray-600 rounded-full flex items-center justify-center text-lg">
-                  {token.icon}
-                </div>
+                <img
+                  src={token.logo}
+                  alt={token.name}
+                  className="w-10 h-10 rounded-full bg-[#121212] object-cover"
+                  onError={e => { e.target.src = "/usdc.png" }}
+                />
                 <div>
                   <div className="flex items-center space-x-2">
                     <span className="text-white font-medium">{token.name}</span>
-                    {token.locked && <FiLock className="w-3 h-3 text-yellow-500" />}
+                    <span className="text-gray-400 text-xs uppercase">({token.symbol})</span>
+                    {renderSocials(token.links)}
                   </div>
-                  <span className="text-gray-400 text-sm">{token.ticker}</span>
+                  <button
+                    className="flex items-center gap-1 text-xs text-gray-400 hover:text-[#FE66F7] mt-1"
+                    onClick={() => handleCopy(token.contractAddress, idx)}
+                    title="Copy address"
+                  >
+                    <FiCopy className="w-4 h-4" />
+                    {copiedIdx === idx ? "Copied!" : " "}
+                  </button>
                 </div>
               </div>
-              <span className="text-green-600 font-medium">{token.value}</span>
+              <div className="text-xs">
+                <div>
+                  <span className="text-white">${token.priceUsd ?? "-"}</span>
+                </div>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
 
       {/* Pagination */}
       <div className="flex items-center justify-center space-x-2 mt-8">{renderPagination()}</div>

@@ -41,7 +41,7 @@ export default function Header() {
 
               {/* Logo */}
               <Link href="/" className="flex items-center gap-2">
-                <Image src="/moonbag.jpg" alt="Moon BAG" width={32} height={32} className="rounded-lg" />
+                <Image src="/moonbag2.jpg" alt="Moon BAG" width={32} height={32} className="rounded-lg" />
                 <span className=" font-semibold text-lg">$MOONBAG</span>
               </Link>
             </div>

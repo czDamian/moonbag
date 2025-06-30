@@ -31,7 +31,7 @@ export default function Sidebar({ isOpen, onClose }) {
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-[#383838]">
           <div className="flex items-center space-x-3">
-            <Image src="/moonbag.jpg" alt="Moon BAG" width={32} height={32} className="rounded-lg" />
+            <Image src="/moonbag2.jpg" alt="Moon BAG" width={32} height={32} className="rounded-lg" />
             <span className="text-white font-semibold text-lg">Moon Bag</span>
           </div>
           <button onClick={onClose} className="p-2 text-gray-400 hover:text-white transition-colors">

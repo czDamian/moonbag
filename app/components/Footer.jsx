@@ -20,7 +20,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
           {/* Logo and Tagline */}
           <div className="flex items-center space-x-3">
-            <Image src="/moonbag.jpg" alt="Moon BAG" width={32} height={32} className="rounded-lg" />
+            <Image src="/moonbag2.jpg" alt="Moon BAG" width={32} height={32} className="rounded-lg" />
             <div>
               <h3 className="text-white font-bold text-lg">$MOONBAG</h3>
               <p className="text-zinc-400 text-sm">Where integrity meets community</p>
@@ -32,6 +32,10 @@ export default function Footer() {
             <a href="https://x.com/MoonBagOG" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-zinc-700 hover:bg-zinc-600 rounded-full flex items-center justify-center transition-colors">
               <FaXTwitter className="w-5 h-5 text-zinc-300 hover:text-white" />
             </a>
+            <a href="https://moonshot.com/?ref=YTPaYyBhYd" target="_blank" rel="noopener noreferrer" className=" hover:bg-zinc-600 rounded-full flex items-center justify-center transition-colors">
+              <Image src="/moonshot.jpg" alt="Moon BAG" width={100} height={100} className="rounded-full w-12" />
+            </a>
+
           </div>
 
           {/* Wallet Address */}

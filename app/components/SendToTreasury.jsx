@@ -42,7 +42,7 @@ export default function SendToTreasury() {
     const fetchTokenDetails = async () => {
       try {
         setError("");
-        const res = await fetch("/api/tokens?tokenId=" + tokenAddress, {
+        const res = await fetch("/api/treasury?tokenId=" + tokenAddress, {
           method: "POST",
         });
         const data = await res.json();
@@ -143,7 +143,7 @@ export default function SendToTreasury() {
     {
       name: "$MOONBAG",
       icon: () => (
-        <Image src="/moonbag.jpg" alt="Moon Bag Token" width={100} height={100} className="rounded-full" />
+        <Image src="/moonbag2.jpg" alt="Moon Bag Token" width={100} height={100} className="rounded-full" />
       ),
       color: "bg-zinc-600",
     },
