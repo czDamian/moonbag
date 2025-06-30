@@ -9,6 +9,7 @@ import Image from "next/image";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { WalletNotConnectedError } from "@solana/wallet-adapter-base";
 import { PublicKey, SystemProgram, Transaction } from "@solana/web3.js";
+import { getAssociatedTokenAddress, createTransferInstruction } from "@solana/spl-token";
 
 export default function SendToTreasury() {
   const [tokenAddress, setTokenAddress] = useState("")
@@ -46,6 +47,7 @@ export default function SendToTreasury() {
           method: "POST",
         });
         const data = await res.json();
+        console.log("token details", data)
         if (data.success === true) {
           setTokenDetails({
             name: data.name,
@@ -99,16 +101,31 @@ export default function SendToTreasury() {
       return;
     }
 
+    if (!tokenAddress) {
+      alert("Please enter a valid token address.");
+      return;
+    }
+
+    // Use decimals from tokenDetails, fallback to 9 if not available
+    const decimals = tokenDetails.decimals
+      ? Number(tokenDetails.decimals)
+      : 9;
+
     try {
-      // Convert amount in SOL to lamports
-      const lamports = Math.floor(Number(amount) * 1e9);
+      const mint = new PublicKey(tokenAddress);
+      const fromTokenAccount = await getAssociatedTokenAddress(mint, publicKey);
+      const toTokenAccount = await getAssociatedTokenAddress(mint, new PublicKey(treasuryAddress));
+
+      // Amount in smallest unit (using fetched decimals)
+      const amountInSmallestUnit = Math.floor(Number(amount) * Math.pow(10, decimals));
 
       const transaction = new Transaction().add(
-        SystemProgram.transfer({
-          fromPubkey: publicKey,
-          toPubkey: new PublicKey(treasuryAddress),
-          lamports,
-        })
+        createTransferInstruction(
+          fromTokenAccount,
+          toTokenAccount,
+          publicKey,
+          amountInSmallestUnit
+        )
       );
 
       const { blockhash, lastValidBlockHeight } = await connection.getLatestBlockhash();
@@ -125,7 +142,7 @@ export default function SendToTreasury() {
         alert("Transaction failed: " + (err.message || err));
       }
     }
-  }, [publicKey, amount, treasuryAddress, connection, sendTransaction]);
+  }, [publicKey, amount, treasuryAddress, connection, sendTransaction, tokenAddress, tokenDetails]);
 
   const tokens = [
     {
@@ -168,7 +185,7 @@ export default function SendToTreasury() {
               onChange={(e) => setTokenAddress(e.target.value)}
               className="w-full bg-zinc-900 border border-zinc-600 rounded-lg px-4 py-3 text-white placeholder-zinc-400 focus:outline-none focus:border-[#4A3085] transition-colors"
             />
-            <p className="text-zinc-300 text-sm my-2">Paste a token address to auto-fetch token info</p>
+            <p className="text-zinc-300 text-sm my-2">Paste a token address to auto-fetch token info. Tokens without a valid logo will receive the USDC logo</p>
             {error && (
               <div className="text-red-500 text-sm mt-2">{error}</div>
             )}
