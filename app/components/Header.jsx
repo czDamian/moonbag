@@ -16,12 +16,12 @@ export default function Header() {
   const [solBalance, setSolBalance] = useState(0.00)
 
   const navigationItems = [
-    { icon: FaDollarSign, label: "TREASURY", active: false },
-    // { icon: RiNftFill, label: "NFTS" },
-    { icon: FaChartBar, label: "LEADERBOARD" },
-    { icon: FaVoteYea, label: "VOTING" },
-    // { icon: GiDustCloud, label: "DUST" },
-    { icon: FaShoppingCart, label: "BUY $MOONBAG", active: true },
+    { icon: FaDollarSign, label: "TREASURY", link: "/treasury" },
+    // { icon: RiNftFill, label: "NFTS", link: "/nfts" },
+    { icon: FaChartBar, label: "LEADERBOARD", link: "#leaderboard" },
+    { icon: FaVoteYea, label: "VOTING", link: "/voting" },
+    // { icon: GiDustCloud, label: "DUST", link: "/dust" },
+    { icon: FaShoppingCart, label: "BUY $MOONBAG", link: "https://dexscreener.com/solana/5zh2jbhmzaeef8ymcndabylv9obz1em2qhnxda7xt55u", external: true, active: true },
   ]
 
   return (
@@ -50,12 +50,13 @@ export default function Header() {
             <nav className="hidden lg:flex items-center space-x-8">
               {navigationItems.map((item, index) => {
                 const Icon = item.icon
-                // Make BUY $MOONBAG an external link
-                if (item.label === "BUY $MOONBAG") {
+                if (item.external) {
                   return (
                     <a
                       key={index}
-                      href="https://dexscreener.com/solana/5zh2jbhmzaeef8ymcndabylv9obz1em2qhnxda7xt55u"
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors text-[#FE66F7] hover:bg-[#fe66f61c]`}
                     >
                       <Icon className="w-4 h-4" />
@@ -63,22 +64,10 @@ export default function Header() {
                     </a>
                   )
                 }
-                // Make VOTING an external link
-                if (item.label === "VOTING") {
-                  return (
-                    <Link
-                      key={index}
-                      href="/voting"
-                      className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors hover:bg-[#fe66f61c] hover:text-[#FE66F7]`}
-                    >
-                      <Icon className="w-4 h-4" />
-                      <span>{item.label}</span>
-                    </Link>
-                  )
-                }
                 return (
-                  <button
+                  <Link
                     key={index}
+                    href={item.link}
                     className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors  ${item.active
                       ? "text-[#FE66F7] bg-[#fe66f61c]"
                       : "text-gray-300 hover:text-[#FE66F7] hover:bg-[#fe66f61c]"
@@ -86,7 +75,7 @@ export default function Header() {
                   >
                     <Icon className="w-4 h-4" />
                     <span>{item.label}</span>
-                  </button>
+                  </Link>
                 )
               })}
             </nav>

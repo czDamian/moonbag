@@ -11,12 +11,12 @@ import Link from "next/link"
 
 export default function Sidebar({ isOpen, onClose }) {
   const navigationItems = [
-    { icon: FaDollarSign, label: "Treasury", active: true },
-    // { icon: RiNftFill, label: "NFTs" },
-    { icon: FaChartBar, label: "Leaderboard" },
-    { icon: FaVoteYea, label: "Voting" },
-    // { icon: GiDustCloud, label: "Dust Collector" },
-    { icon: FaShoppingCart, label: "Buy $MOONBAG", special: true },
+    { icon: FaDollarSign, label: "Treasury", link: "/treasury", active: true },
+    // { icon: RiNftFill, label: "NFTs", link: "/nfts" },
+    { icon: FaChartBar, label: "Leaderboard", link: "#leaderboard" },
+    { icon: FaVoteYea, label: "Voting", link: "/voting" },
+    // { icon: GiDustCloud, label: "Dust Collector", link: "/dust" },
+    { icon: FaShoppingCart, label: "Buy $MOONBAG", link: "https://dexscreener.com/solana/5zh2jbhmzaeef8ymcndabylv9obz1em2qhnxda7xt55u", external: true, special: true },
   ]
 
   if (!isOpen) return null
@@ -43,12 +43,11 @@ export default function Sidebar({ isOpen, onClose }) {
         <nav className="flex-1 py-4">
           {navigationItems.map((item, index) => {
             const Icon = item.icon;
-            // If it's the special "Buy $MOONBAG" button, render as a link
-            if (item.special) {
+            if (item.external) {
               return (
                 <a
                   key={index}
-                  href="https://dexscreener.com/solana/5zh2jbhmzaeef8ymcndabylv9obz1em2qhnxda7xt55u"
+                  href={item.link}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full flex items-center space-x-3 px-6 py-3 text-left transition-colors text-[#FE66F7] hover:bg-[#383838] font-medium"
@@ -58,30 +57,18 @@ export default function Sidebar({ isOpen, onClose }) {
                 </a>
               );
             }
-            // If it's the Voting link, render as an external link
-            if (item.label === "Voting") {
-              return (
-                <Link
-                  key={index}
-                  href="/voting"
-                  className="w-full flex items-center space-x-3 px-6 py-3 text-left transition-colors hover:bg-[#383838] font-medium"
-                >
-                  <Icon className="w-5 h-5" />
-                  <span>{item.label}</span>
-                </Link>
-              );
-            }
             return (
-              <button
+              <Link
                 key={index}
+                href={item.link}
                 className={`w-full flex items-center space-x-3 px-6 py-3 text-left transition-colors ${item.active
                   ? "bg-[#383838] text-white border-r-2 border-[#fe66f7a1]"
                   : "text-gray-300 hover:bg-[#383838] hover:text-white"
-                  }`}
+                  } font-medium`}
               >
                 <Icon className="w-5 h-5" />
-                <span className="font-medium">{item.label}</span>
-              </button>
+                <span>{item.label}</span>
+              </Link>
             );
           })}
         </nav>
@@ -89,8 +76,6 @@ export default function Sidebar({ isOpen, onClose }) {
         {/* Wallet Section */}
         <div className="border-t border-[#383838] p-4 space-y-3">
           <div className="text-gray-400 text-sm font-medium uppercase tracking-wider">Wallet</div>
-
-          {/* SOL Balance */}
           <div className="flex items-center space-x-3 p-3 bg-[#383838] rounded-lg">
             <div className="w-8 h-8 bg-gradient-to-r from-purple-400 to-purple-600 rounded-full flex items-center justify-center">
               <SiSolana className="w-4 h-4 text-white" />
@@ -99,8 +84,6 @@ export default function Sidebar({ isOpen, onClose }) {
               <div className="text-white font-medium">0.00 SOL</div>
             </div>
           </div>
-
-          {/* View Wallet Details */}
           <button className="w-full flex items-center space-x-3 p-3 text-gray-300 hover:bg-[#383838] hover:text-white rounded-lg transition-colors">
             <MdAccountBalanceWallet className="w-5 h-5" />
             <span className="font-medium">View Wallet Details</span>
