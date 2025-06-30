@@ -1,4 +1,3 @@
-import Header from "../components/Header"
 import VotingPage from "./VotingPage"
 
 
@@ -10,7 +9,6 @@ export const metadata = {
 const page = () => {
   return (
     <div>
-      <Header />
       <VotingPage />
     </div>
   )
