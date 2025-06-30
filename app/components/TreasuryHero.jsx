@@ -56,7 +56,7 @@ export default function TreasuryHero() {
                   Total Value
                 </h3>
                 <span className="text-[#FE66F7] text-2xl font-bold ">
-                  $2,938,697.37
+                  $1,378,231.02
                 </span>
               </div>
             </div>
@@ -67,7 +67,7 @@ export default function TreasuryHero() {
                 <h3 className="text-gray-400 text-sm font-medium mb-2">
                   Treasury Address
                 </h3>
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center justify-center space-x-2">
                   <span className="text-gray-300 font-mono text-sm break-all">
                     {treasuryAddress}
                   </span>
@@ -84,7 +84,7 @@ export default function TreasuryHero() {
                   Total Value
                 </h3>
                 <span className="text-[#FE66F7] text-2xl font-bold">
-                  $2,938,697.37
+                  $1,378,231.02
                 </span>
               </div>
             </div>
