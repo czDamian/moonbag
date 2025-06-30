@@ -10,6 +10,8 @@ import Sidebar from "./Sidebar"
 import Image from "next/image"
 import Link from "next/link"
 import ConnectWallet from "./ConnectWallet"
+import { GrPlan } from "react-icons/gr";
+
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -18,8 +20,9 @@ export default function Header() {
   const navigationItems = [
     { icon: FaDollarSign, label: "TREASURY", link: "/treasury" },
     // { icon: RiNftFill, label: "NFTS", link: "/nfts" },
-    { icon: FaChartBar, label: "LEADERBOARD", link: "#leaderboard" },
-    { icon: FaVoteYea, label: "VOTING", link: "/voting" },
+    // { icon: FaChartBar, label: "LEADERBOARD", link: "#leaderboard" },
+    { icon: FaVoteYea, label: "VOTING", link: "/voting" }, 
+    { icon: GrPlan, label: "ROADMAP", link: "/roadmap" },
     // { icon: GiDustCloud, label: "DUST", link: "/dust" },
     { icon: FaShoppingCart, label: "BUY $MOONBAG", link: "https://dexscreener.com/solana/5zh2jbhmzaeef8ymcndabylv9obz1em2qhnxda7xt55u", external: true, active: true },
   ]

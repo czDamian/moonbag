@@ -6,6 +6,7 @@ import { RiNftFill } from "react-icons/ri"
 import { GiDustCloud } from "react-icons/gi"
 import { MdAccountBalanceWallet } from "react-icons/md"
 import { SiSolana } from "react-icons/si"
+import { GrPlan } from "react-icons/gr";
 import Image from "next/image"
 import Link from "next/link"
 
@@ -15,6 +16,7 @@ export default function Sidebar({ isOpen, onClose }) {
     // { icon: RiNftFill, label: "NFTs", link: "/nfts" },
     { icon: FaChartBar, label: "Leaderboard", link: "#leaderboard" },
     { icon: FaVoteYea, label: "Voting", link: "/voting" },
+    { icon: GrPlan, label: "Roadmap", link: "/roadmap" },
     // { icon: GiDustCloud, label: "Dust Collector", link: "/dust" },
     { icon: FaShoppingCart, label: "Buy $MOONBAG", link: "https://dexscreener.com/solana/5zh2jbhmzaeef8ymcndabylv9obz1em2qhnxda7xt55u", external: true, special: true },
   ]

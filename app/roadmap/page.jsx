@@ -1,14 +1,14 @@
-import VotingPage from "./VotingPage"
+import RoadMap from "./RoadMap";
 
 export const metadata = {
-  title: "Voting || Moon Bag",
+  title: "Roadmap || Moon Bag",
   description: "Moon Bag Treasury",
 };
 
 const page = () => {
   return (
     <div>
-      <VotingPage />
+      <RoadMap/>
     </div>
   )
 }
