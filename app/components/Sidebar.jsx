@@ -18,6 +18,7 @@ export default function Sidebar({ isOpen, onClose }) {
     { icon: FaVoteYea, label: "Voting", link: "/voting" },
     { icon: GrPlan, label: "Roadmap", link: "/roadmap" },
     // { icon: GiDustCloud, label: "Dust Collector", link: "/dust" },
+    { icon: GrPlan, label: "WhitePaper", link: "/whitepaper" },
     { icon: FaShoppingCart, label: "Buy $MOONBAG", link: "https://dexscreener.com/solana/5zh2jbhmzaeef8ymcndabylv9obz1em2qhnxda7xt55u", external: true, special: true },
   ]
 
@@ -52,7 +53,7 @@ export default function Sidebar({ isOpen, onClose }) {
                   href={item.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full flex items-center space-x-3 px-6 py-3 text-left transition-colors text-[#FE66F7] hover:bg-[#383838] font-medium"
+                  className="w-full flex items-center space-x-3 px-6 py-3 text-left transition-colors mt-4 text-[#FE66F7] hover:bg-[#383838] font-medium"
                 >
                   <Icon className="w-5 h-5" />
                   <span>{item.label}</span>
@@ -63,7 +64,7 @@ export default function Sidebar({ isOpen, onClose }) {
               <Link
                 key={index}
                 href={item.link}
-                className={`w-full flex items-center space-x-3 px-6 py-3 text-left transition-colors ${item.active
+                className={`w-full my-2 flex items-center space-x-3 px-6 py-3 text-left transition-colors ${item.active
                   ? "bg-[#383838] text-white border-r-2 border-[#fe66f7a1]"
                   : "text-gray-300 hover:bg-[#383838] hover:text-white"
                   } font-medium`}
@@ -74,23 +75,6 @@ export default function Sidebar({ isOpen, onClose }) {
             );
           })}
         </nav>
-
-        {/* Wallet Section */}
-        <div className="border-t border-[#383838] p-4 space-y-3">
-          <div className="text-gray-400 text-sm font-medium uppercase tracking-wider">Wallet</div>
-          <div className="flex items-center space-x-3 p-3 bg-[#383838] rounded-lg">
-            <div className="w-8 h-8 bg-gradient-to-r from-purple-400 to-purple-600 rounded-full flex items-center justify-center">
-              <SiSolana className="w-4 h-4 text-white" />
-            </div>
-            <div className="flex-1">
-              <div className="text-white font-medium">0.00 SOL</div>
-            </div>
-          </div>
-          <button className="w-full flex items-center space-x-3 p-3 text-gray-300 hover:bg-[#383838] hover:text-white rounded-lg transition-colors">
-            <MdAccountBalanceWallet className="w-5 h-5" />
-            <span className="font-medium">View Wallet Details</span>
-          </button>
-        </div>
       </div>
     </>
   )

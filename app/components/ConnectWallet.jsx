@@ -18,7 +18,7 @@ const ConnectWallet = ({ onBalanceChange }) => {
     if (publicKey) {
       const connection = new Connection(clusterApiUrl("devnet"));
       connection.getBalance(publicKey).then((lamports) => {
-        const sol = lamports / 1e9;
+        const sol = (lamports / 1e9).toFixed(2);
         setBalance(sol);
         if (onBalanceChange) {
           onBalanceChange(sol);

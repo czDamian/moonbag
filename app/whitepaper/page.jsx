@@ -1,14 +1,14 @@
-import VotingPage from "./VotingPage"
+import WhitePaper from "./WhitePaper";
 
 export const metadata = {
-  title: "Voting || Moon Bag",
+  title: "WhitePaper || Moon Bag",
   description: "Where Integrity Meets Community",
 };
 
 const page = () => {
   return (
     <div>
-      <VotingPage />
+      <WhitePaper/>
     </div>
   )
 }

@@ -11,13 +11,13 @@ const roboto = Roboto({
 
 export const metadata = {
   title: "Moon Bag",
-  description: "Moon Bag Treasury",
+  description: "Where Integrity Meets Community",
   authors: [{ name: 'Damian', url: 'https://x.com/MoonBagOG' }],
   robots: 'index, follow',
   openGraph: {
     title: "Moon Bag",
     description:
-      "Moon Bag Treasury",
+      "Where Integrity Meets Community",
     url: "https://www.moon-bag.fun/",
     siteName: "MoonBag",
     locale: "en_US",
@@ -27,7 +27,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: "Moon Bag",
     description:
-      "Moon Bag Treasury",
+      "Where Integrity Meets Community",
   },
 };
 

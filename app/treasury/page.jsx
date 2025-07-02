@@ -4,7 +4,7 @@ import TreasuryHero from "../components/TreasuryHero";
 
 export const metadata = {
   title: "Treasury || Moon Bag",
-  description: "Moon Bag Treasury",
+  description: "Where Integrity Meets Community",
 };
 
 export default function Treasury() {

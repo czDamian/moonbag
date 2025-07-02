@@ -5,6 +5,7 @@ import { FaFire } from "react-icons/fa"
 import { FaBell } from "react-icons/fa6";
 import { IoCreate } from "react-icons/io5";
 import { DiGoogleAnalytics } from "react-icons/di";
+import { motion } from "framer-motion";
 
 export default function VotingPage() {
   const votingMethods = [
@@ -42,17 +43,41 @@ export default function VotingPage() {
     },
   ]
 
+  const cardVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: (i = 1) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: i * 0.12,
+        duration: 0.6,
+        type: "spring",
+        stiffness: 60,
+      },
+    }),
+  };
+
   return (
     <div className=" py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
-        <div className="text-center mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+          className="text-center mb-12"
+        >
           {/* Icon */}
-          <div className="flex justify-center mb-6">
-            <div className="w-16 h-16 bg-gradient-to-br from-[#3D2A78] to-[#4A3085] rounded-lg flex items-center justify-center transform rotate-45">
+          <motion.div
+            initial={{ scale: 0.7, rotate: 0 }}
+            animate={{ scale: 1, rotate: 45 }}
+            transition={{ duration: 0.7, delay: 0.2, type: "spring" }}
+            className="flex justify-center mb-6"
+          >
+            <div className="w-16 h-16 bg-gradient-to-br from-[#3D2A78] to-[#4A3085] rounded-lg flex items-center justify-center transform">
               <div className="w-8 h-8 bg-zinc-900 rounded-sm transform -rotate-45"></div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Title */}
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
@@ -65,19 +90,29 @@ export default function VotingPage() {
           </p>
 
           {/* How It Works Button */}
-          <button className="inline-flex items-center space-x-2 bg-[#4A3085] hover:bg-[#3D2A78] text-white px-6 py-3 rounded-lg font-medium transition-colors">
+          <motion.button
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.5, duration: 0.4 }}
+            className="inline-flex items-center space-x-2 bg-[#4A3085] hover:bg-[#3D2A78] text-white px-6 py-3 rounded-lg font-medium transition-colors"
+          >
             <FiInfo className="w-4 h-4" />
             <span>HOW IT WORKS</span>
-          </button>
-        </div>
+          </motion.button>
+        </motion.div>
 
         {/* Voting Methods Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {votingMethods.map((method, index) => {
             const Icon = method.icon
             return (
-              <div
+              <motion.div
                 key={index}
+                variants={cardVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                custom={index}
                 className="bg-zinc-800 border border-zinc-700 rounded-lg p-6 hover:border-zinc-600 transition-colors"
               >
                 {/* Icon */}
@@ -93,17 +128,29 @@ export default function VotingPage() {
 
                 {/* Description */}
                 <p className="text-zinc-400 text-sm leading-relaxed">{method.description}</p>
-              </div>
+              </motion.div>
             )
           })}
         </div>
 
         {/* Coming Soon Section */}
-        <div className="text-center py-16 border-t border-zinc-800">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="text-center py-16 border-t border-zinc-800"
+        >
           <div className="max-w-4xl mx-auto">
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full mb-6">
+            <motion.div
+              initial={{ scale: 0.7, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, delay: 0.3, type: "spring" }}
+              className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full mb-6"
+            >
               <span className="text-3xl">🚀</span>
-            </div>
+            </motion.div>
 
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Coming Soon</h2>
 
@@ -113,36 +160,66 @@ export default function VotingPage() {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-              <button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-8 py-3 rounded-lg font-medium transition-all duration-200">
+              <motion.button
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ delay: 0.4, duration: 0.4 }}
+                className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-8 py-3 rounded-lg font-medium transition-all duration-200"
+              >
                 Get Notified
-              </button>
-              <button className="border border-zinc-600 hover:border-zinc-500 text-zinc-300 hover:text-white px-8 py-3 rounded-lg font-medium transition-colors">
+              </motion.button>
+              <motion.button
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ delay: 0.5, duration: 0.4 }}
+                className="border border-zinc-600 hover:border-zinc-500 text-zinc-300 hover:text-white px-8 py-3 rounded-lg font-medium transition-colors"
+              >
                 Learn More
-              </button>
+              </motion.button>
             </div>
 
             {/* Feature Preview */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-12 w-full">
-              <div className="bg-zinc-800/50 border border-zinc-700 rounded-lg p-4 lg:p-8">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ delay: 0.2, duration: 0.5 }}
+                className="bg-zinc-800/50 border border-zinc-700 rounded-lg p-4 lg:p-8"
+              >
                 <DiGoogleAnalytics className="inline text-center text-purple-400 text-3xl mb-2" />
                 <h4 className="text-white font-medium mb-1 lg:text-xl lg:mb-2">Analytics Dashboard</h4>
                 <p className="text-zinc-400 text-sm lg:text-base">Real-time voting statistics and governance metrics</p>
-              </div>
+              </motion.div>
 
-              <div className="bg-zinc-800/50 border border-zinc-700 rounded-lg p-4">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ delay: 0.3, duration: 0.5 }}
+                className="bg-zinc-800/50 border border-zinc-700 rounded-lg p-4"
+              >
                 <IoCreate className="inline text-center text-pink-400 text-3xl mb-2" />
                 <h4 className="text-white font-medium mb-1 lg:text-xl lg:mb-2">Proposal Creation</h4>
                 <p className="text-zinc-400 text-sm lg:text-base">Submit and manage community proposals easily</p>
-              </div>
+              </motion.div>
 
-              <div className="bg-zinc-800/50 border border-zinc-700 rounded-lg p-4">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ delay: 0.4, duration: 0.5 }}
+                className="bg-zinc-800/50 border border-zinc-700 rounded-lg p-4"
+              >
                 <FaBell className="inline text-center text-blue-400 text-3xl mb-2" />
                 <h4 className="text-white font-medium mb-1 lg:text-xl lg:mb-2">Smart Notifications</h4>
                 <p className="text-zinc-400 text-sm lg:text-base">Get alerts for new proposals and voting deadlines</p>
-              </div>
+              </motion.div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   )
