@@ -9,8 +9,10 @@ import { SiSolana } from "react-icons/si"
 import { GrPlan } from "react-icons/gr";
 import Image from "next/image"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 export default function Sidebar({ isOpen, onClose }) {
+  const router = useRouter();
   const navigationItems = [
     { icon: FaDollarSign, label: "Treasury", link: "/treasury", active: true },
     // { icon: RiNftFill, label: "NFTs", link: "/nfts" },
@@ -23,6 +25,14 @@ export default function Sidebar({ isOpen, onClose }) {
   ]
 
   if (!isOpen) return null
+
+  // Handler for navigation
+  const handleNav = (e, link, external) => {
+    if (external) return; // Let anchor tag handle external links
+    e.preventDefault();
+    router.push(link);
+    onClose();
+  };
 
   return (
     <>
@@ -54,6 +64,7 @@ export default function Sidebar({ isOpen, onClose }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full flex items-center space-x-3 px-6 py-3 text-left transition-colors mt-4 text-[#FE66F7] hover:bg-[#383838] font-medium"
+                  onClick={onClose}
                 >
                   <Icon className="w-5 h-5" />
                   <span>{item.label}</span>
@@ -68,6 +79,7 @@ export default function Sidebar({ isOpen, onClose }) {
                   ? "bg-[#383838] text-white border-r-2 border-[#fe66f7a1]"
                   : "text-gray-300 hover:bg-[#383838] hover:text-white"
                   } font-medium`}
+                onClick={e => handleNav(e, item.link, false)}
               >
                 <Icon className="w-5 h-5" />
                 <span>{item.label}</span>

@@ -1,4 +1,4 @@
-import { Roboto } from "next/font/google";
+import { Roboto, Raleway } from "next/font/google";
 import "./globals.css";
 import { Wallet } from "./components/Wallet";
 import Header from "./components/Header";
@@ -7,6 +7,13 @@ import Footer from "./components/Footer";
 const roboto = Roboto({
   variable: "--font-roboto",
   subsets: ["latin"],
+});
+
+const raleway = Raleway({
+  variable: "--font-raleway",
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
 });
 
 export const metadata = {
@@ -35,7 +42,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${roboto.variable} font-(family-name:--font-roboto) antialiased`}
+        className={`${roboto.variable} ${raleway.variable} font-raleway antialiased`}
       >
         <Wallet>
           <div>

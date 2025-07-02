@@ -131,7 +131,7 @@ export default function RoadMap() {
               variants={containerVariants}
               className="bg-[#18181b] border border-[#383838] rounded-xl p-8 shadow-lg"
             >
-              <div className="flex items-center gap-5 mb-4">
+              <div className="flex items-center gap-5 mb-4 ">
                 {step.icon}
                 <h2 className="text-2xl sm:text-3xl font-semibold text-white">
                   {step.title}
@@ -147,7 +147,7 @@ export default function RoadMap() {
                   ))}
                 </ul>
               )}
-              <div className="space-y-2">
+              <div className="space-y-2 ">
                 {step.details.map((detail, i) => (
                   <div
                     key={i}

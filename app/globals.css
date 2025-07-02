@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@theme inline{
+  --font-roboto: var(--font-roboto);
+  --font-raleway: var(--font-raleway);
+}
 body {
   background-color: #121212;
   color: #fff;

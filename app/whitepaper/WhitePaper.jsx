@@ -22,7 +22,7 @@ export default function WhitePaper() {
   const sections = [
     {
       key: "intro",
-      title: "📌 1. Introduction",
+      title: "1. Introduction",
       content: (
         <p className="text-zinc-300 mb-2">
           MoonBag is not just a memecoin — it’s a meme-powered, community-driven decentralized treasury protocol that evolves into a smart DeFi AI fund.
@@ -31,7 +31,7 @@ export default function WhitePaper() {
     },
     {
       key: "vision",
-      title: "🌕 2. Vision & Mission",
+      title: "2. Vision & Mission",
       content: (
         <ul className="list-disc list-inside text-zinc-300 space-y-1">
           <li>Democratize fund management through memes and AI.</li>
@@ -42,7 +42,7 @@ export default function WhitePaper() {
     },
     {
       key: "treasury",
-      title: "💰 3. Treasury Fund – Phase 1",
+      title: "3. Treasury Fund – Phase 1",
       content: (
         <>
           <ul className="list-disc list-inside text-zinc-300 space-y-1 mb-2">
@@ -66,7 +66,7 @@ export default function WhitePaper() {
     },
     {
       key: "vaults",
-      title: "🔄 4. Community Vaults – Phase 2",
+      title: "4. Community Vaults – Phase 2",
       content: (
         <>
           <div className="mb-2">
@@ -86,7 +86,7 @@ export default function WhitePaper() {
     },
     {
       key: "ai",
-      title: "🤖 5. DeFi AI Fund – Phase 3",
+      title: "5. DeFi AI Fund – Phase 3",
       content: (
         <ul className="list-disc list-inside text-zinc-300 space-y-1">
           <li>
@@ -103,7 +103,7 @@ export default function WhitePaper() {
     },
     {
       key: "eco",
-      title: "🌐 6. Ecosystem Expansion – Phase 4",
+      title: "6. Ecosystem Expansion – Phase 4",
       content: (
         <ul className="list-disc list-inside text-zinc-300 space-y-1">
           <li>MoonBag DEX: Meme token DEX with trending metrics.</li>
@@ -115,7 +115,7 @@ export default function WhitePaper() {
     },
     {
       key: "utility",
-      title: "🪙 7. Token Utility ($MOONBAG)",
+      title: "7. Token Utility ($MOONBAG)",
       content: (
         <ul className="list-disc list-inside text-zinc-300 space-y-1">
           <li>DAO Governance</li>
@@ -129,7 +129,7 @@ export default function WhitePaper() {
     },
     {
       key: "security",
-      title: "🔒 8. Security & Transparency",
+      title: "8. Security & Transparency",
       content: (
         <ul className="list-disc list-inside text-zinc-300 space-y-1">
           <li>Multi-sig wallet for treasury</li>
@@ -141,7 +141,7 @@ export default function WhitePaper() {
     },
     {
       key: "roadmap",
-      title: "🔭 9. Roadmap (2025+)",
+      title: "9. Roadmap (2025+)",
       content: (
         <ul className="list-disc list-inside text-zinc-300 space-y-1">
           <li>Q3 2025 – Community DAO launch, transparent fund explorer</li>
@@ -175,7 +175,14 @@ export default function WhitePaper() {
             </motion.div>
           </div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
-            MoonBag Whitepaper <span className="text-[#FE66F7]">v1.0</span>
+            MoonBag           <span
+              className="text-[#FE66F7] mr-3"
+              style={{
+                textShadow: "0 0 2px #FE66F7, 0 0 4px #FE66F7",
+              }}
+            >
+              WhitePaper
+            </span>
           </h1>
           <p className="text-zinc-400 text-lg sm:text-xl max-w-2xl mx-auto mb-8">
             Where Integrity Meets Community.
@@ -194,8 +201,8 @@ export default function WhitePaper() {
               custom={idx}
               className="bg-zinc-900/60 border border-zinc-700 rounded-lg p-6"
             >
-              <h2 className="text-xl font-semibold text-white mb-2">{section.title}</h2>
-              {section.content}
+              <h2 className="text-2xl lg:text-3xl font-semibold text-white mb-6 md:mb-8">{section.title}</h2>
+              <div className="leading-10 pl-2">{section.content}</div>
             </motion.section>
           ))}
         </div>
