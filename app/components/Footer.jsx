@@ -29,6 +29,9 @@ export default function Footer() {
 
           {/* Social Media Icons */}
           <div className="flex items-center space-x-4">
+            <a href="https://x.com/moonbaglabs" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-zinc-700 hover:bg-zinc-600 rounded-full flex items-center justify-center transition-colors">
+              <Image src="/moonbaglabs.jpg" alt="Moon BAG" width={100} height={100} className="rounded-full w-12" />
+            </a>
             <a href="https://x.com/MoonBagOG" target="_blank" rel="noopener noreferrer" className="w-12 h-12 bg-zinc-700 hover:bg-zinc-600 rounded-full flex items-center justify-center transition-colors">
               <FaXTwitter className="w-5 h-5 text-zinc-300 hover:text-white" />
             </a>
